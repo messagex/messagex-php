@@ -3,7 +3,7 @@
 
 namespace PhpApiClient\models;
 
-use PhpApiClient\Client\RestClient;
+use PhpApiClient\RestClient\RestClient;
 
 
 class BaseModel
@@ -21,11 +21,11 @@ class BaseModel
 
     protected function makeRequest(string $method, string $path, array $payload=[])
     {
-        $this->response = $this->client->makeRequest($method, $path, $payload);
+        $response = $this->client->makeRequest($method, $path, $payload);
 
-        $this->statusCode = $this->response->getStatusCode();
-        $this->reasonPhrase = $this->response->getReasonPhrase();
-        $this->body = $this->response->getBody();
+        $this->statusCode = $response->getStatusCode();
+        $this->reasonPhrase = $response->getReasonPhrase();
+        $this->body = (string)$response->getBody();
     }
 
     public function getStatusCode()
@@ -40,6 +40,14 @@ class BaseModel
 
     public function getBody()
     {
-        return $this->getBody();
+        return $this->body;
+    }
+
+    public function populateModel($json)
+    {
+        $json = json_decode($json);
+        foreach ($json->data as $key=>$value) {
+            $this->$key = $value;
+        }
     }
 }

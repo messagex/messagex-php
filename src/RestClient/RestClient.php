@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpApiClient\Client;
+namespace PhpApiClient\RestClient;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7;

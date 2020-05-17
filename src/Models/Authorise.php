@@ -11,17 +11,41 @@ class Authorise extends BaseModel
 
     protected $response;
 
+    protected $bearerToken;
+    protected $refreshToken;
+    protected $expiresAt;
+    protected $apiKeyId;
+
     public function login(string $apiKey, string $apiSecret)
     {
-         Client::logger($apiKey .' - '. $apiSecret);
          $this->makeRequest('POST', 'authorise', ['apiKey' => $apiKey, 'apiSecret' => $apiSecret]);
 
          if ($this->statusCode == 201) {
-             Client::logger('returning value');
              Client::logger($this->getBody());
-             return 'hi';//$this->getBody();
+             $this->populateModel($this->getBody());
+             return $this;
          } else {
-             die("failed. Status code: ". $this->statusCode ."\n");
+             die("Failed. Status code: ". $this->statusCode ."\n");
          }
+    }
+
+    public function getBearerToken()
+    {
+        return $this->bearerToken;
+    }
+
+    public function getRefreshToken()
+    {
+        return $this->refreshToken;
+    }
+
+    public function getApiKeyId()
+    {
+        return $this->apiKeyId;
+    }
+
+    public function getExpiryDate()
+    {
+        return $this->expiresAt;
     }
 }
