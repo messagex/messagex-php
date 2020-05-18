@@ -7,10 +7,6 @@ use PhpApiClient\Client;
 
 class Authorise extends BaseModel
 {
-    protected $client;
-
-    protected $response;
-
     protected $bearerToken;
     protected $refreshToken;
     protected $expiresAt;
@@ -21,11 +17,10 @@ class Authorise extends BaseModel
          $this->makeRequest('POST', 'authorise', ['apiKey' => $apiKey, 'apiSecret' => $apiSecret]);
 
          if ($this->statusCode == 201) {
-             Client::logger($this->getBody());
              $this->populateModel($this->getBody());
              return $this;
          } else {
-             die("Failed. Status code: ". $this->statusCode ."\n");
+             return false;
          }
     }
 

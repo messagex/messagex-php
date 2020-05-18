@@ -13,7 +13,24 @@ class RestClient
 
     public $client;
 
-    public function __construct()
+    public function __construct(string $apiKey, string $apiSecret)
+    {
+        $this->createClient();
+        $this->getBearerToken($apiKey, $apiSecret);
+    }
+
+    protected function getBearerToken($apiKey, $apiSecret)
+    {
+        $response = $this->makeRequest('POST', 'authorise', ['apiKey' => $apiKey, 'apiSecret' => $apiSecret]);
+
+        if ($response->getStatusCode() == 201) {
+            $bearerToken = $this->retrieveToken($response->getbody());
+
+            $this->createClient($bearerToken);
+        }
+    }
+
+    public function createClient(string $bearerToken=null)
     {
         $host = $this->host . $this->version;
 
@@ -23,9 +40,22 @@ class RestClient
             'headers' => [
                 'Accept'     => 'application/json',
                 'Content-Type'     => 'application/json',
+                'Authorization'    => 'Bearer '. $bearerToken,
             ],
             'http_errors' => false, // $response will never be populated if left as true.
         ]);
+    }
+
+    public function retrieveToken($json)
+    {
+        $json = json_decode($json);
+
+        return $json->data->bearerToken ?? null;
+    }
+
+    public function setBearerToken($token)
+    {
+        $this->client = $this->createClient($token);
     }
 
     public function makeRequest(string $method, string $path, array $payload=[])
