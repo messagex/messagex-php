@@ -8,6 +8,12 @@ use GuzzleHttp\Exception\RequestException;
 
 class RestClient
 {
+    const STATUS_CODE_OK = 200;
+    const STATUS_CODE_CREATED = 201;
+    const STATUS_CODE_NO_CONTENT = 204;
+    const STATUS_CODE_NOT_FOUND = 404;
+    const STATUS_CODE_VALIDATION_ERROR = 422;
+
     protected $version = '';
     protected $host = 'http://localhost:8000/api/';
 
@@ -65,15 +71,14 @@ class RestClient
         try {
             $response = $this->client->request($method, $path, ['json' => $payload]);
         } catch (RequestException $e) {
-            if ($e->hasResponse()) {
-                echo Psr7\str($e->getResponse());
-            }
-        }
-
-        if (!isset($response)) {
             $msg = 'There is an issue connecting to Messagex Api';
             throw new \Exception($msg);
         }
+
+//        if (!isset($response)) {
+//            $msg = 'There is an issue connecting to Messagex Api';
+//            throw new \Exception($msg);
+//        }
 
         return $response;
     }

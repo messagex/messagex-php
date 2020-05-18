@@ -32,20 +32,20 @@ class Client
         $this->body = (string)$response->getBody();
     }
 
-    public function populateModel($json)
+    public function populateModel($data)
     {
-        $json = json_decode($json);
-        foreach ($json->data as $key=>$value) {
+        $data = json_decode($data);
+        foreach ($data->data as $key=>$value) {
             $this->$key = $value;
         }
     }
 
-    public function extractJson($json)
+    public function extractData($data)
     {
         $res = new \stdClass;
 
-        $json = json_decode($json);
-        foreach ($json as $key=>$value) {
+        $data = json_decode($data);
+        foreach ($data as $key=>$value) {
             $res->$key = $value;
         }
 

@@ -3,6 +3,7 @@
 namespace PhpApiClient\Models;
 
 use PhpApiClient\Client;
+use PhpApiClient\RestClient\RestClient;
 
 
 class Mail
@@ -17,14 +18,14 @@ class Mail
     public function send(array $payload)
     {
         $this->client->request('POST', 'mail/send', $payload);
-        $res = $this->client->extractJson($this->client->body);
+        $res = $this->client->extractData($this->client->body);
 
-        if ($this->client->statusCode == 200) {
+        if ($this->client->statusCode == RestClient::STATUS_CODE_OK) {
             Client::logger($this->client->body);
 
             return $res;
 
-        } elseif ($this->client->statusCode == 422) {
+        } elseif ($this->client->statusCode == RestClient::STATUS_CODE_VALIDATION_ERROR) {
             $res->success = false;
             return $res;
         } else {
