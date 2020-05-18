@@ -5,7 +5,7 @@ namespace PhpApiClient\Models;
 use PhpApiClient\Client;
 
 
-class Mail// extends BaseModel
+class Mail
 {
     protected $client;
 

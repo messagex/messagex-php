@@ -9,6 +9,11 @@
             "email": "damien.buttler@smsglobal.com"
         }
     ],
+    "config": {
+        "platform": {
+            "php": "7.1"
+        }
+    },
     "require": {
         "guzzlehttp/guzzle": "^6.5"
     },

@@ -7,15 +7,15 @@ use PhpApiClient\RestClient\RestClient;
 
 class Client
 {
+    protected $restClient;
+
     public $body;
     public $statusCode;
     public $reasonPhrase;
 
     public function __construct(string $apiKey, string $apiSecret)
     {
-        $this->client = new RestClient($apiKey, $apiSecret);
-
-//        $this->mail = new Mail;
+        $this->restClient = new RestClient($apiKey, $apiSecret);
     }
 
     public function mail()
@@ -25,7 +25,7 @@ class Client
 
     public function request(string $method, string $path, array $payload=[])
     {
-        $response = $this->client->makeRequest($method, $path, $payload);
+        $response = $this->restClient->makeRequest($method, $path, $payload);
 
         $this->statusCode = $response->getStatusCode();
         $this->reasonPhrase = $response->getReasonPhrase();
