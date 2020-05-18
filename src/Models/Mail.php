@@ -16,16 +16,19 @@ class Mail
 
     public function send(array $payload)
     {
-         $this->client->request('POST', 'mail/send', $payload);
+        $this->client->request('POST', 'mail/send', $payload);
+        $res = $this->client->extractJson($this->client->body);
 
-         Client::logger($this->client->statusCode);
-         if ($this->client->statusCode == 200) {
-             Client::logger($this->client->body);
-             $res = $this->client->extractJson($this->client->body);
+        if ($this->client->statusCode == 200) {
+            Client::logger($this->client->body);
 
-             return $res->success;
-         } else {
-             return false;
-         }
+            return $res;
+
+        } elseif ($this->client->statusCode == 422) {
+            $res->success = false;
+            return $res;
+        } else {
+            return false;
+        }
     }
 }

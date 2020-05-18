@@ -27,6 +27,8 @@ class RestClient
             $bearerToken = $this->retrieveToken($response->getbody());
 
             $this->createClient($bearerToken);
+        } else {
+            throw new \Exception('Unable to login with API credentials.');
         }
     }
 
