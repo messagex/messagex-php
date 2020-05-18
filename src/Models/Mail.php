@@ -15,6 +15,12 @@ class Mail
         $this->client = $client;
     }
 
+    /**
+     * Send mail.
+     *
+     * @param array $payload
+     * @return bool
+     */
     public function send(array $payload)
     {
         $this->client->request('POST', 'mail/send', $payload);

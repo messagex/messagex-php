@@ -25,6 +25,13 @@ class RestClient
         $this->getBearerToken($apiKey, $apiSecret);
     }
 
+    /**
+     * Log into host to retrieve bearer token.
+     *
+     * @param $apiKey
+     * @param $apiSecret
+     * @throws \Exception
+     */
     protected function getBearerToken($apiKey, $apiSecret)
     {
         $response = $this->makeRequest('POST', 'authorise', ['apiKey' => $apiKey, 'apiSecret' => $apiSecret]);
@@ -38,6 +45,11 @@ class RestClient
         }
     }
 
+    /**
+     * Instantiate client for to make requests to remote host.
+     *
+     * @param string|null $bearerToken
+     */
     public function createClient(string $bearerToken=null)
     {
         $host = $this->host . $this->version;
@@ -54,6 +66,12 @@ class RestClient
         ]);
     }
 
+    /**
+     * Retrieve bearer token from authorisation response.
+     *
+     * @param $json
+     * @return |null
+     */
     public function retrieveToken($json)
     {
         $json = json_decode($json);
@@ -61,24 +79,22 @@ class RestClient
         return $json->data->bearerToken ?? null;
     }
 
-    public function setBearerToken($token)
-    {
-        $this->client = $this->createClient($token);
-    }
-
+    /**
+     * Make request to remote host.
+     *
+     * @param string $method
+     * @param string $path
+     * @param array $payload
+     * @return mixed
+     * @throws \Exception
+     */
     public function makeRequest(string $method, string $path, array $payload=[])
     {
         try {
             $response = $this->client->request($method, $path, ['json' => $payload]);
         } catch (RequestException $e) {
-            $msg = 'There is an issue connecting to Messagex Api';
-            throw new \Exception($msg);
+            throw new \Exception('There is an issue connecting to Messagex Api');
         }
-
-//        if (!isset($response)) {
-//            $msg = 'There is an issue connecting to Messagex Api';
-//            throw new \Exception($msg);
-//        }
 
         return $response;
     }

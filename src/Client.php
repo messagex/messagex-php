@@ -18,11 +18,24 @@ class Client
         $this->restClient = new RestClient($apiKey, $apiSecret);
     }
 
+    /**
+     * Instantiate mail model.
+     *
+     * @return Mail
+     */
     public function mail()
     {
         return new Mail($this);
     }
 
+    /**
+     * Make request to host and catch response.
+     *
+     * @param string $method
+     * @param string $path
+     * @param array $payload
+     * @throws \Exception
+     */
     public function request(string $method, string $path, array $payload=[])
     {
         $response = $this->restClient->makeRequest($method, $path, $payload);
@@ -32,6 +45,11 @@ class Client
         $this->body = (string)$response->getBody();
     }
 
+    /**
+     * Parse Json data response with key value pairs.
+     *
+     * @param $data
+     */
     public function populateModel($data)
     {
         $data = json_decode($data);
@@ -40,6 +58,12 @@ class Client
         }
     }
 
+    /**
+     * Parse JSON response to key value pairs.
+     *
+     * @param $data
+     * @return \stdClass
+     */
     public function extractData($data)
     {
         $res = new \stdClass;
@@ -52,6 +76,11 @@ class Client
         return $res;
     }
 
+    /**
+     * Logger for dev. @todo remove
+     *
+     * @param $msg
+     */
     public static function logger($msg)
     {
         $logFile = __DIR__.'/../../api/storage/logs/laravel-2020-05-18.log';
