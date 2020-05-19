@@ -1,5 +1,5 @@
 {
-    "name": "messagex/php-api-client",
+    "name": "messagex/messagex",
     "description": "A library to make requests to the Messagex API.",
     "type": "library",
     "license": "MIT",
