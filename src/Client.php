@@ -38,11 +38,13 @@ class Client
      */
     public function request(string $method, string $path, array $payload=[])
     {
+        self::logger("request made: $method - $path");
         $response = $this->restClient->makeRequest($method, $path, $payload);
 
         $this->statusCode = $response->getStatusCode();
         $this->reasonPhrase = $response->getReasonPhrase();
         $this->body = (string)$response->getBody();
+        self::logger('statusCode: '. $this->statusCode);
     }
 
     /**
@@ -83,7 +85,8 @@ class Client
      */
     public static function logger($msg)
     {
-        $logFile = __DIR__.'/../../api/storage/logs/laravel-2020-05-18.log';
+        $logFile = __DIR__.'/../../api/storage/logs/laravel-2020-05-20.log';
+        $logFile = '/tmp/phpd.log';
         file_put_contents($logFile, "sdk--  ". print_r($msg, true) ." \n", FILE_APPEND);
     }
 

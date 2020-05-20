@@ -14,7 +14,8 @@
         </testsuite>
     </testsuites>
     <php>
-          <env name="APP_ENV" value="testing" force="true" />
+          <env name="environment" value="testing" force="true" />
+          <env name="messagexHost" value="localhost:8082" force="true" />
     </php>
 </phpunit>
 

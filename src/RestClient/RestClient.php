@@ -22,7 +22,9 @@ class RestClient
     public function __construct(string $apiKey, string $apiSecret)
     {
         $this->createClient();
-        $this->getBearerToken($apiKey, $apiSecret);
+        $bearerToken = $this->getBearerToken($apiKey, $apiSecret);
+        // Login with bearer token
+        $this->createClient($bearerToken);
     }
 
     /**
@@ -30,19 +32,22 @@ class RestClient
      *
      * @param $apiKey
      * @param $apiSecret
+     * @return |null
      * @throws \Exception
      */
-    protected function getBearerToken($apiKey, $apiSecret)
+    public function getBearerToken($apiKey, $apiSecret)
     {
         $response = $this->makeRequest('POST', 'authorise', ['apiKey' => $apiKey, 'apiSecret' => $apiSecret]);
 
         if ($response->getStatusCode() == 201) {
             $bearerToken = $this->retrieveToken($response->getbody());
-
-            $this->createClient($bearerToken);
+            file_put_contents('/tmp/phpd.log', '--------- '. $bearerToken, FILE_APPEND);
         } else {
             throw new \Exception('Unable to login with API credentials.');
         }
+
+        file_put_contents('/tmp/phpd.log', '--------- HERE HERE HERE', FILE_APPEND);
+        return $bearerToken;
     }
 
     /**
@@ -52,7 +57,11 @@ class RestClient
      */
     public function createClient(string $bearerToken=null)
     {
-        $host = $this->host . $this->version;
+        $host = $this->getHost() . $this->version;
+
+        if (getenv('environment') == 'testing') {
+            $host = 'localhost:8889';
+        }
 
         $this->client = new Client([
             'base_uri' => $host,
@@ -64,6 +73,15 @@ class RestClient
             ],
             'http_errors' => false, // $response will never be populated if left as true.
         ]);
+    }
+
+    public function getHost()
+    {
+        if ($devHost = getenv('messagexHost')) {
+            return $devHost;
+        }
+
+        return $this->host;
     }
 
     /**

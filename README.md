@@ -31,7 +31,7 @@ composer require messagex/php-messagex
 Instantiate the library
 
 ```php
-use messagex\php-messagex;
+use messagex\messagex;
 
 ...
 
