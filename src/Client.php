@@ -50,6 +50,24 @@ class Client
     }
 
     /**
+     * Parse JSON response to key value pairs.
+     *
+     * @param $data
+     * @return \stdClass
+     */
+    public function extractData($data)
+    {
+        $res = new \stdClass;
+
+        $data = json_decode($data);
+        foreach ($data as $key=>$value) {
+            $res->$key = $value;
+        }
+
+        return $res;
+    }
+
+    /**
      * Logger for dev. @todo remove
      *
      * @param $msg

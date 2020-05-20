@@ -16,7 +16,7 @@ class Mail
     }
 
     /**
-     * Send mail.
+     * Send mail
      *
      * @param array $payload
      * @return bool
