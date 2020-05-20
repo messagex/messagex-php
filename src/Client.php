@@ -45,37 +45,8 @@ class Client
         $this->reasonPhrase = $response->getReasonPhrase();
         $this->body = (string)$response->getBody();
         self::logger('statusCode: '. $this->statusCode);
-    }
 
-    /**
-     * Parse Json data response with key value pairs.
-     *
-     * @param $data
-     */
-    public function populateModel($data)
-    {
-        $data = json_decode($data);
-        foreach ($data->data as $key=>$value) {
-            $this->$key = $value;
-        }
-    }
-
-    /**
-     * Parse JSON response to key value pairs.
-     *
-     * @param $data
-     * @return \stdClass
-     */
-    public function extractData($data)
-    {
-        $res = new \stdClass;
-
-        $data = json_decode($data);
-        foreach ($data as $key=>$value) {
-            $res->$key = $value;
-        }
-
-        return $res;
+        return $this->statusCode;
     }
 
     /**

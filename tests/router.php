@@ -9,6 +9,7 @@ $request = $method .' '. $uri;
 logger("request made: $request");
 $requestMap = [
     'POST /authorise' => 'authorise.php',
+    'POST /mail/send' => 'mailsend.php',
 ];
 
 if (!array_key_exists($request, $requestMap)) {

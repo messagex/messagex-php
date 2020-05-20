@@ -1,7 +1,6 @@
 <?php
 
 $response = [
-        'help' => 'me',
         'statusCode' => 201,
         'body' =>
             '{

@@ -12,22 +12,10 @@ class RestClientTest extends TestCase
     public function testGetBearerToken()
     {
         $rc = new RestClient('abc', '123');
-
-
         $bearerToken = $rc->getBearerToken('abc', '123');
 
         $this->assertEquals($bearerToken, 'auth-bearer-token-abc123');
     }
-
-//    public function testGetBearerToken()
-//    {
-//        $rc = new Client('abc', '123');
-//        $bearerToken = $rc->request('POST', 'authorise', []);
-//
-//        die(var_dump($bearerToken));
-////        $this->assertEquals($response->);
-//        $response->assertStatus(400);
-//    }
 
     public function testRetrieveToken()
     {
