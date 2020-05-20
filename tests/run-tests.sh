@@ -11,6 +11,7 @@ PROCESS_ID=$!
 
 echo PHP server process ID is $PROCESS_ID
 
-$PHPUNIT $TEST_PATH $TEST_FILTER --coverage-html html tests/
+#$PHPUNIT $TEST_PATH $TEST_FILTER --coverage-text=coverage.txt tests/
+$PHPUNIT $TEST_PATH $TEST_FILTER --coverage-html ./html tests/
 
 kill -9 $PROCESS_ID

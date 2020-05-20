@@ -19,6 +19,7 @@ if (!array_key_exists($request, $requestMap)) {
 include(__DIR__ .'/Factories/'. $requestMap[$request]);
 
 http_response_code($response['statusCode']);
+header('Content-Type', 'application/json');
 echo $response['body'];
 
 logger($response['body']);
