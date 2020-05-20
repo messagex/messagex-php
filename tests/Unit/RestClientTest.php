@@ -17,8 +17,8 @@ class RestClientTest extends TestCase
         $bearerToken = $rc->getBearerToken('abc', '123');
 
         $this->assertEquals($bearerToken, 'auth-bearer-token-abc123');
-//        $response->assertStatus(400);
     }
+
 //    public function testGetBearerToken()
 //    {
 //        $rc = new Client('abc', '123');
@@ -38,5 +38,20 @@ class RestClientTest extends TestCase
             RestClient::retrieveToken($json),
             $token
         );
+    }
+
+    public function testGetHost()
+    {
+        $rc = new RestClient('abc', '123');
+        $this->assertEquals($rc->gethost(), getenv('apiHost'));
+    }
+
+    public function testMakeRequest()
+    {
+        $payload = ['apiKey' => 'abc', 'apiSecret' => '132'];
+
+        $rc = new RestClient('abc', '123');
+        $response = $rc->makeRequest('POST', 'authorise', $payload);
+        $this->assertEquals($response->getStatusCode(), 201);
     }
 }

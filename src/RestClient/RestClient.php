@@ -59,10 +59,6 @@ class RestClient
     {
         $host = $this->getHost() . $this->version;
 
-        if (getenv('environment') == 'testing') {
-            $host = 'localhost:8889';
-        }
-
         $this->client = new Client([
             'base_uri' => $host,
             'timeout' => 2.0,
@@ -77,11 +73,13 @@ class RestClient
 
     public function getHost()
     {
-        if ($devHost = getenv('messagexHost')) {
-            return $devHost;
+        $host = $this->host;
+
+        if ($devHost = getenv('apiHost')) {
+            $host = $devHost;
         }
 
-        return $this->host;
+        return $host;
     }
 
     /**

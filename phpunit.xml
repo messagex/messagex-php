@@ -10,12 +10,17 @@
 	         stopOnFailure="false">
     <testsuites>
         <testsuite name="Unit">
-            <directory suffix="Test.php">./tests/Unit</directory>
+            <directory suffix=".php">./tests/Unit</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
     <php>
           <env name="environment" value="testing" force="true" />
-          <env name="messagexHost" value="localhost:8082" force="true" />
+          <env name="apiHost" value="localhost:8889" force="true" />
     </php>
 </phpunit>
 

@@ -7,6 +7,6 @@ PROCESS_ID=$!
 
 echo PHP server process ID is $PROCESS_ID
 
-$PHPUNIT $1 $2
+$PHPUNIT --coverage-html html tests/ $1 $2
 
 kill -9 $PROCESS_ID
