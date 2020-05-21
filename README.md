@@ -13,6 +13,7 @@ This SDK provides enables node applications with an easy to use interface to the
 
 * [Installation](#installation)
 * [Examples](#examples)
+* [Testing](#testing)
 
 ---
 
@@ -73,3 +74,8 @@ $payload = [
 
 $client->mail()->send($payload);
 ```
+
+## Testing
+
+To run tests, run the script `tests/run-tests.sh`. Coverage reports are 
+saved to the `./html` which you should view in your browser.
