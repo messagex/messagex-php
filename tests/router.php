@@ -27,7 +27,7 @@ class Router
     private function getRequestMap()
     {
         return [
-            'POST /authorise' => 'authorise.php',
+            'POST /authorise' => 'authorise',
         ];
     }
 
@@ -36,7 +36,7 @@ class Router
         if (array_key_exists($this->requestIndex, $this->getRequestMap()))
         {
             $this->logger("------------- request made: ". $this->requestIndex);
-            include (__DIR__ .'/Factories/'. $this->getRequestMap()[$this->requestIndex]);
+            $response = $this->getFactory($this->getRequestMap()[$this->requestIndex]);
 
             $this->sendResponse($response);
         }
@@ -44,8 +44,17 @@ class Router
         $this->sendResponse($this->data);
     }
 
+    private function getFactory($factory)
+    {
+        $json = file_get_contents(__DIR__ ."/Factories/$factory.json");
 
+        $json = json_decode($json);
+        $response = ['statusCode' => $json->statusCode,
+                     'body' => json_encode($json->body),
+        ];
 
+        return $response;
+    }
 
     private function sendResponse($response)
     {
