@@ -1,0 +1,33 @@
+{
+    "name": "messagex/messagex",
+    "description": "A library to make requests to the Messagex API.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Damien",
+            "email": "damien.buttler@smsglobal.com"
+        }
+    ],
+    "config": {
+        "platform": {
+            "php": "7.3"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^6.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhpApiClient\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "messagex\\PhpApiClient\\": "src/"
+        }
+    }
+}
