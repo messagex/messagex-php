@@ -40,7 +40,7 @@ class RestClient
         $response = $this->makeRequest('POST', 'authorise', ['apiKey' => $apiKey, 'apiSecret' => $apiSecret]);
 
         if ($response->getStatusCode() == 201) {
-            $bearerToken = $this->retrieveToken($response->getbody());
+            $bearerToken = $this->retrieveToken($response->getBody());
             file_put_contents('/tmp/phpd.log', '--------- '. $bearerToken, FILE_APPEND);
         } else {
             throw new \Exception('Unable to login with API credentials.');
