@@ -23,4 +23,16 @@ class BaseModel
 
         return $res;
     }
+
+    public function parseSuccess($data)
+    {
+        $res = new \stdClass;
+
+        $data = json_decode($data);
+        foreach ($data as $key=>$value) {
+            $res->$key = $value;
+        }
+
+        return $res;
+    }
 }

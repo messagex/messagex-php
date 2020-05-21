@@ -2,7 +2,7 @@
 
 namespace PhpApiClient;
 
-use PhpApiClient\Models\Mail;
+use PhpApiClient\Models\MailClient;
 
 class Client
 {
@@ -22,7 +22,8 @@ class Client
     private function login($apiKey, $apiSecret)
     {
         $bearerToken = $this->authClient($this->restClient)->getBearerToken($apiKey, $apiSecret);
-        self::logger("--------------- BEARER TOKEN: $bearerToken");
+
+        return $bearerToken;
     }
 
     private function authClient($restClient)
@@ -33,11 +34,11 @@ class Client
     /**
      * Instantiate mail model.
      *
-     * @return Mail
+     * @return MailClient
      */
     public function mail()
     {
-        return new Mail($this);
+        return new MailClient($this->authRestClient);
     }
 
     /**
