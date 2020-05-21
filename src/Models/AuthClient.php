@@ -3,7 +3,7 @@
 
 namespace PhpApiClient\Models;
 
-use PhpApiClient\Models\AuthModel\Guzzle;
+use PhpApiClient\Models\AuthModel\AuthHttp;
 use PhpApiClient\Models\AuthModel\Auth;
 
 class AuthClient
@@ -13,7 +13,7 @@ class AuthClient
 
     public function __construct($restClient)
     {
-        $this->guzzle = new Guzzle($restClient);
+        $this->guzzle = new AuthHttp($restClient);
         $this->model = new Auth;
     }
 

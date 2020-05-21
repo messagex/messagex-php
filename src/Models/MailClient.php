@@ -3,23 +3,23 @@
 
 namespace PhpApiClient\Models;
 
-use PhpApiClient\Models\MailModel\Guzzle;
+use PhpApiClient\Models\MailModel\MailHttp;
 use PhpApiClient\Models\MailModel\Mail;
 
 class MailClient
 {
-    private $guzzle;
+    private $mailHttp;
     private $model;
 
     public function __construct($restClient)
     {
-        $this->guzzle = new Guzzle($restClient);
+        $this->mailHttp = new MailHttp($restClient);
         $this->model = new Mail;
     }
 
     public function send($payload)
     {
-        $response = $this->guzzle->send($payload);
+        $response = $this->mailHttp->send($payload);
 
         if (!$response) {
             return;

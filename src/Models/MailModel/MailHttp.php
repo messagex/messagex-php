@@ -4,7 +4,7 @@
 namespace PhpApiClient\Models\MailModel;
 
 
-class Guzzle
+class MailHttp
 {
     protected $restClient;
 

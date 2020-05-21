@@ -4,7 +4,7 @@
 namespace PhpApiClient\Models\AuthModel;
 
 
-class Guzzle
+class AuthHttp
 {
     protected $restClient;
 
