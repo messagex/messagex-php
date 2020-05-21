@@ -11,8 +11,8 @@ class MailModelTest extends TestCase
     public function testSendSuccess()
     {
         $payload = [
-            'responseCode' => 200,
-            'responseBody' => '{
+            'statusCode' => 200,
+            'body' => '{
                 "success": true
              }'
         ];
@@ -26,8 +26,8 @@ class MailModelTest extends TestCase
     public function testSendFailure()
     {
         $payload = [
-            'responseCode' => 422,
-            'responseBody' => '{
+            'statusCode' => 422,
+            'body' => '{
                 "success": false
              }'
         ];

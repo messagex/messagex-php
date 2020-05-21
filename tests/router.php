@@ -12,24 +12,24 @@ $request = $method .' '. $uri;
 
 $requestMap = [
     'POST /authorise' => 'authorise.php',
-//    'POST /mail/send' => 'mailSendSuccess.php',
 ];
 
 if (array_key_exists($request, $requestMap)) {
     logger("------------- request made: $request");
     include(__DIR__ .'/Factories/'. $requestMap[$request]);
 
+    sendResponse($response);
+}
+
+sendResponse($data);
+
+function sendResponse($response)
+{
     http_response_code($response['statusCode']);
     header('Content-Type', 'application/json');
     echo $response['body'];
     exit;
 }
-
-http_response_code($data['responseCode']);
-header('Content-Type', 'application/json');
-echo $data['responseBody'];
-exit;
-
 
 function parseInput()
 {
