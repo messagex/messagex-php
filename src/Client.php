@@ -60,6 +60,7 @@ class Client
         $res = new \stdClass;
 
         $data = json_decode($data);
+        $this->logger($data);
         foreach ($data as $key=>$value) {
             $res->$key = $value;
         }
@@ -74,7 +75,7 @@ class Client
      */
     public static function logger($msg)
     {
-        $logFile = __DIR__.'/../../api/storage/logs/laravel-2020-05-20.log';
+        $logFile = __DIR__.'/../../api/storage/logs/laravel-2020-05-21.log';
         $logFile = '/tmp/phpd.log';
         file_put_contents($logFile, "sdk--  ". print_r($msg, true) ." \n", FILE_APPEND);
     }

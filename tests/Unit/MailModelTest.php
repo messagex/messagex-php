@@ -11,27 +11,10 @@ class MailModelTest extends TestCase
     public function testSendSuccess()
     {
         $payload = [
-            "from" => [
-                "address" => "damien.buttler@smsglobal.com",
-                "name" => "MessageX"
-            ],
-            "to" => [
-                [
-                    "address" => "damien.buttler@smsglobal.com",
-                    "name" => "testtesttest"
-                ],
-            ],
-            "subject" => "Transactional Email 1",
-            "content" => [
-                [
-                    "type" => "text/html",
-                    "body" => "<body>This is the body. Go to <a href=\"http://theage.com.au?one=two\">The Age</a> to see the news. Or go to <a href=\"https://google.com\">Google</a> to search for more</body>"
-                ],
-                [
-                    "type" => "text/plain",
-                    "body" => "AAA Plaintext email content."
-                ]
-            ],
+            'responseCode' => 200,
+            'responseBody' => '{
+                "success": true
+             }'
         ];
         $client = new Client('abc', '123');
         $mail = new Mail($client);
@@ -40,13 +23,13 @@ class MailModelTest extends TestCase
         $this->assertEquals($response->success, true);
     }
 
-    public function DISABLEDtestSendFailure()
+    public function testSendFailure()
     {
         $payload = [
-            "froml" => [
-                "address" => "damien.buttler@smsglobal.com",
-                "name" => "MessageX"
-            ],
+            'responseCode' => 422,
+            'responseBody' => '{
+                "success": false
+             }'
         ];
         $client = new Client('abc', '123');
         $mail = new Mail($client);

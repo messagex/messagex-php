@@ -4,27 +4,39 @@ $method = $_SERVER['REQUEST_METHOD'];
 $uri = $_SERVER['REQUEST_URI'];
 $protocol = $_SERVER['SERVER_PROTOCOL'];
 
+$data = parseInput();
+logger("====================");
+logger($data);
+logger("====================");
 $request = $method .' '. $uri;
 
-logger("request made: $request");
 $requestMap = [
     'POST /authorise' => 'authorise.php',
-    'POST /mail/send' => 'mailSendSuccess.php',
+//    'POST /mail/send' => 'mailSendSuccess.php',
 ];
 
-if (!array_key_exists($request, $requestMap)) {
-    http_response_code(404);
+if (array_key_exists($request, $requestMap)) {
+    logger("------------- request made: $request");
+    include(__DIR__ .'/Factories/'. $requestMap[$request]);
+
+    http_response_code($response['statusCode']);
+    header('Content-Type', 'application/json');
+    echo $response['body'];
+    exit;
 }
 
-include(__DIR__ .'/Factories/'. $requestMap[$request]);
-
-http_response_code($response['statusCode']);
+http_response_code($data['responseCode']);
 header('Content-Type', 'application/json');
-echo $response['body'];
+echo $data['responseBody'];
+exit;
 
-logger($response['body']);
 
+function parseInput()
+{
+    $data = file_get_contents('php://input');
 
+    return json_decode($data, true);
+}
 
 function logger($msg)
 {

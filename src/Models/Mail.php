@@ -29,13 +29,12 @@ class Mail
         if ($this->client->statusCode == RestClient::STATUS_CODE_OK) {
             Client::logger($this->client->body);
 
-            return $res;
+            $res->success = true;
 
         } elseif ($this->client->statusCode == RestClient::STATUS_CODE_VALIDATION_ERROR) {
             $res->success = false;
-            return $res;
-        } else {
-            return false;
         }
+
+        return $res;
     }
 }
