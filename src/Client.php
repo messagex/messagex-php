@@ -6,7 +6,6 @@ use PhpApiClient\Models\MailClient;
 
 class Client
 {
-    protected $restClient;
     protected $authRestClient;
 
     protected $version = '';
@@ -14,14 +13,14 @@ class Client
 
     public function __construct(string $apiKey, string $apiSecret)
     {
-        $this->restClient = $this->createClient();
-        $bearerToken = $this->login($apiKey, $apiSecret);
+        $restClient = $this->createClient();
+        $bearerToken = $this->login($restClient, $apiKey, $apiSecret);
         $this->authRestClient = $this->createClient($bearerToken);
     }
 
-    private function login($apiKey, $apiSecret)
+    private function login($restClient, $apiKey, $apiSecret)
     {
-        $bearerToken = $this->authClient($this->restClient)->getBearerToken($apiKey, $apiSecret);
+        $bearerToken = $this->authClient($restClient)->getBearerToken($apiKey, $apiSecret);
 
         return $bearerToken;
     }
