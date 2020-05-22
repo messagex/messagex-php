@@ -12,7 +12,10 @@
     "config": {
         "platform": {
             "php": "7.3"
-        }
+        },
+        "files": [
+            "helpers.php"
+        ]
     },
     "require": {
         "guzzlehttp/guzzle": "^6.5"

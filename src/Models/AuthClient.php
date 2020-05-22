@@ -19,22 +19,10 @@ class AuthClient
 
 
         if ($response->getStatusCode() == 201) {
-            $data = $this->parseResponse($response->getBody());
+            $data = parseResponse($response->getBody());
             return $data->bearerToken;
         }
 
         return false;
-    }
-
-    public function parseResponse($data)
-    {
-        $res = new \stdClass;
-
-        $data = json_decode($data);
-        foreach ($data->data as $key=>$value) {
-            $res->$key = $value;
-        }
-
-        return $res;
     }
 }
