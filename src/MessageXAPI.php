@@ -6,7 +6,10 @@ use PhpApiClient\Models\MailClient;
 
 class MessageXAPI
 {
-    protected $authRestClient;
+    private $authClient;
+    private $mailClient;
+
+    protected $restClient;
 
     protected $version = '';
     protected $host = 'http://localhost:8000/api/';
@@ -15,7 +18,7 @@ class MessageXAPI
     {
         $restClient = $this->createClient();
         $bearerToken = $this->login($restClient, $apiKey, $apiSecret);
-        $this->authRestClient = $this->createClient($bearerToken);
+        $this->restClient = $this->createClient($bearerToken);
     }
 
     private function login($restClient, $apiKey, $apiSecret)
@@ -25,9 +28,19 @@ class MessageXAPI
         return $bearerToken;
     }
 
+    /**
+     * Initialise $authClient.
+     *
+     * @param $restClient
+     * @return Models\AuthClient
+     */
     private function authClient($restClient)
     {
-        return new Models\AuthClient($restClient);
+        if (!$this->authClient) {
+            $this->authClient = new Models\AuthClient($restClient);
+        }
+
+        return $this->authClient;
     }
 
     /**
@@ -37,7 +50,11 @@ class MessageXAPI
      */
     public function mail()
     {
-        return new MailClient($this->authRestClient);
+        if (!$this->mailClient) {
+            $this->mailClient = new MailClient($this->restClient);
+        }
+
+        return $this->mailClient;
     }
 
     /**

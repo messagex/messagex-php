@@ -15,7 +15,7 @@ class MailClient
     public function send($payload)
     {
         $response = $this->restClient->request('POST', 'mail/send', ['json' => $payload]);
-        $data = parseSuccess($response->getBody());
+        $data = \parseSuccess($response->getBody());
 
         return $data;
     }

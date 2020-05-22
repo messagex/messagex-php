@@ -19,7 +19,7 @@ class AuthClient
 
 
         if ($response->getStatusCode() == 201) {
-            $data = parseResponse($response->getBody());
+            $data = \parseResponse($response->getBody());
             return $data->bearerToken;
         }
 
