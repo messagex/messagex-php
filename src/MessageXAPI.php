@@ -2,6 +2,9 @@
 
 namespace PhpApiClient;
 
+use GuzzleHttp\Client;
+
+use PhpApiClient\Clients\AuthClient;
 use PhpApiClient\Clients\MailClient;
 
 class MessageXAPI
@@ -37,7 +40,7 @@ class MessageXAPI
     private function authClient($restClient)
     {
         if (!$this->authClient) {
-            $this->authClient = new Clients\AuthClient($restClient);
+            $this->authClient = new AuthClient($restClient);
         }
 
         return $this->authClient;
@@ -60,13 +63,14 @@ class MessageXAPI
     /**
      * Instantiate client for to make requests to remote host.
      *
-     * @param string|null $bearerToken
+     * @param string $bearerToken
+     * @return Client
      */
     public function createClient(string $bearerToken=null)
     {
         $host = $this->host . $this->version;
 
-        $restClient = new \GuzzleHttp\Client([
+        $restClient = new Client([
             'base_uri' => $host,
             'timeout' => 2.0,
             'headers' => [
