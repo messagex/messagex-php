@@ -4,7 +4,7 @@ namespace PhpApiClient;
 
 use PhpApiClient\Models\MailClient;
 
-class Client
+class MessageXAPI
 {
     protected $authRestClient;
 
@@ -70,7 +70,6 @@ class Client
      */
     public static function logger($msg)
     {
-        $logFile = __DIR__.'/../../api/storage/logs/laravel-2020-05-21.log';
         $logFile = '/tmp/phpd.log';
         file_put_contents($logFile, "sdk--  ". print_r($msg, true) ." \n", FILE_APPEND);
     }

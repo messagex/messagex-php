@@ -1,30 +1,34 @@
 <?php
 
-
 namespace PhpApiClient\Models;
 
-use PhpApiClient\Models\MailModel\MailHttp;
-use PhpApiClient\Models\MailModel\Mail;
 
 class MailClient
 {
-    private $mailHttp;
-    private $model;
+    private $restClient;
 
     public function __construct($restClient)
     {
-        $this->mailHttp = new MailHttp($restClient);
-        $this->model = new Mail;
+        $this->restClient = $restClient;
     }
 
     public function send($payload)
     {
-        $response = $this->mailHttp->send($payload);
+        $response = $this->restClient->request('POST', 'mail/send', ['json' => $payload]);
+        $data = $this->parseSuccess($response->getBody());
 
-        if (!$response) {
-            return;
+        return $data;
+    }
+
+    public function parseSuccess($data)
+    {
+        $res = new \stdClass;
+
+        $data = json_decode($data);
+        foreach ($data as $key=>$value) {
+            $res->$key = $value;
         }
 
-        return $this->model->parseSuccess($response);
+        return $res;
     }
 }

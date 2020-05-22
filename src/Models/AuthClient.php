@@ -1,32 +1,40 @@
 <?php
 
-
 namespace PhpApiClient\Models;
 
-use PhpApiClient\Models\AuthModel\AuthHttp;
-use PhpApiClient\Models\AuthModel\Auth;
 
 class AuthClient
 {
-    private $guzzle;
-    private $model;
+    protected $restClient;
 
     public function __construct($restClient)
     {
-        $this->guzzle = new AuthHttp($restClient);
-        $this->model = new Auth;
+        $this->restClient = $restClient;
     }
 
     public function getBearerToken($apiKey, $apiSecret)
     {
-        $response = $this->guzzle->getBearerToken($apiKey, $apiSecret);
+        $payload = ['apiKey' => $apiKey, 'apiSecret' => $apiSecret];
+        $response = $this->restClient->request('POST', 'authorise', ['json' => $payload]);
 
-        if (!$response) {
-            return;
+
+        if ($response->getStatusCode() == 201) {
+            $data = $this->parseResponse($response->getBody());
+            return $data->bearerToken;
         }
 
-        $model = $this->model->parseResponse($response);
+        return false;
+    }
 
-        return $model->bearerToken;
+    public function parseResponse($data)
+    {
+        $res = new \stdClass;
+
+        $data = json_decode($data);
+        foreach ($data->data as $key=>$value) {
+            $res->$key = $value;
+        }
+
+        return $res;
     }
 }
