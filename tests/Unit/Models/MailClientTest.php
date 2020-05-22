@@ -6,8 +6,9 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use PHPUnit\Framework\TestCase;
 use GuzzleHttp\HandlerStack;
-use PhpApiClient\Models\MailClient;
 use GuzzleHttp\Psr7\Response;
+
+use PhpApiClient\Models\MailClient;
 
 class MailClientTest extends TestCase
 {
@@ -19,8 +20,8 @@ class MailClientTest extends TestCase
         $handlerStack = HandlerStack::create($mock);
         $restClient = new Client(['handler' => $handlerStack]);
 
-        $rc = new MailClient($restClient);
-        $response = $rc->send([]);
+        $mailClient = new MailClient($restClient);
+        $response = $mailClient->send([]);
 
         $this->assertEquals($response->success, true);
     }

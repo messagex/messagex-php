@@ -17,9 +17,9 @@ class AuthClient
         $payload = ['apiKey' => $apiKey, 'apiSecret' => $apiSecret];
         $response = $this->restClient->request('POST', 'authorise', ['json' => $payload]);
 
-
         if ($response->getStatusCode() == 201) {
             $data = parseResponse($response->getBody());
+
             return $data->bearerToken;
         }
 
