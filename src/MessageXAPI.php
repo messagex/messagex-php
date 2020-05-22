@@ -2,7 +2,7 @@
 
 namespace PhpApiClient;
 
-use PhpApiClient\Models\MailClient;
+use PhpApiClient\Clients\MailClient;
 
 class MessageXAPI
 {
@@ -32,12 +32,12 @@ class MessageXAPI
      * Initialise $authClient.
      *
      * @param $restClient
-     * @return Models\AuthClient
+     * @return Clients\AuthClient
      */
     private function authClient($restClient)
     {
         if (!$this->authClient) {
-            $this->authClient = new Models\AuthClient($restClient);
+            $this->authClient = new Clients\AuthClient($restClient);
         }
 
         return $this->authClient;

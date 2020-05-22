@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 
-use PhpApiClient\Models\AuthClient;
+use PhpApiClient\Clients\AuthClient;
 
 class AuthClientTest extends TestCase
 {

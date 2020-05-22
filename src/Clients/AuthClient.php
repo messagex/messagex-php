@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpApiClient\Models;
+namespace PhpApiClient\Clients;
 
 
 class AuthClient

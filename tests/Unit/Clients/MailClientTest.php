@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 
-use PhpApiClient\Models\MailClient;
+use PhpApiClient\Clients\MailClient;
 
 class MailClientTest extends TestCase
 {
