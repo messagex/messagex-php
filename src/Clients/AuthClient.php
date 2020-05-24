@@ -2,6 +2,13 @@
 
 namespace PhpApiClient\Clients;
 
+/**
+ * This class will is to make a login request to the API to obtain the bearer token for
+ * making authenticated requests.
+ *
+ * Class AuthClient
+ * @package PhpApiClient\Clients
+ */
 
 class AuthClient
 {
@@ -12,6 +19,13 @@ class AuthClient
         $this->restClient = $restClient;
     }
 
+    /**
+     * Make a request to the API to get the bearer token.
+     *
+     * @param $apiKey
+     * @param $apiSecret
+     * @return bool
+     */
     public function getBearerToken($apiKey, $apiSecret)
     {
         $payload = ['apiKey' => $apiKey, 'apiSecret' => $apiSecret];

@@ -9,14 +9,41 @@ use PhpApiClient\Clients\MailClient;
 
 class MessageXAPI
 {
+    /**
+     * @var $authClient
+     */
     private $authClient;
+
+    /**
+     * @var $mailClient
+     */
     private $mailClient;
 
+    /**
+     * Rest client to make API requests.
+     *
+     * @var Client
+     */
     protected $restClient;
 
+    /**
+     * @var string
+     */
     protected $version = '';
+
+    /**
+     * @var string
+     */
     protected $host = 'http://localhost:8000/api/';
 
+    /**
+     * This is the entry point to the SDK. It will use the API keys to login to obtain
+     * the bearer token to make authenticated requests.
+     *
+     * MessageXAPI constructor.
+     * @param string $apiKey
+     * @param string $apiSecret
+     */
     public function __construct(string $apiKey, string $apiSecret)
     {
         $restClient = $this->createClient();
@@ -24,6 +51,14 @@ class MessageXAPI
         $this->restClient = $this->createClient($bearerToken);
     }
 
+    /**
+     * Login with API keys to obtain bearer tokens.
+     *
+     * @param $restClient
+     * @param $apiKey
+     * @param $apiSecret
+     * @return bool
+     */
     private function login($restClient, $apiKey, $apiSecret)
     {
         $bearerToken = $this->authClient($restClient)->getBearerToken($apiKey, $apiSecret);
@@ -83,16 +118,4 @@ class MessageXAPI
 
         return $restClient;
     }
-
-    /**
-     * Logger for dev. @todo remove
-     *
-     * @param $msg
-     */
-    public static function logger($msg)
-    {
-        $logFile = '/tmp/phpd.log';
-        file_put_contents($logFile, "sdk--  ". print_r($msg, true) ." \n", FILE_APPEND);
-    }
-
 }
