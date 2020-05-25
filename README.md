@@ -7,7 +7,7 @@
 
 ![MessageX Logo](https://raw.githubusercontent.com/messagex/node-messagex/master/img/messagex-logo.png "MessageX")
 
-This SDK provides enables node applications with an easy to use interface to the MessageX API.
+This SDK provides enables PHP applications with an easy to use interface to the MessageX API.
 
 ---
 
@@ -20,7 +20,7 @@ This SDK provides enables node applications with an easy to use interface to the
 ## Installation
 
 ```sh
-composer require messagex/php-messagex
+composer require messagex/messagex
 ```
 
 ---
