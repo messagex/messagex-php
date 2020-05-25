@@ -11,7 +11,7 @@
     ],
     "config": {
         "platform": {
-            "php": "7"
+            "php": "7.3"
         }
     },
     "require": {
@@ -23,7 +23,10 @@
     "autoload": {
         "psr-4": {
             "PhpApiClient\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
