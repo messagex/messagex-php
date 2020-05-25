@@ -113,7 +113,6 @@ class MessageXAPI
                 'Content-Type'     => 'application/json',
                 'Authorization'    => 'Bearer '. $bearerToken,
             ],
-            'http_errors' => false, // $response will never be populated if left as true on non 2XX responses.
         ]);
 
         return $restClient;
