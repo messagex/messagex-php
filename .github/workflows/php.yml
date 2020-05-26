@@ -11,6 +11,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        php: [7.1, 7.2, 7.3]
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -26,4 +29,4 @@ jobs:
       run: composer install --prefer-dist
 
     - name: Run tests
-      run: vendor/bin/phpunit
+      run: php${{ matrix.php }} vendor/bin/phpunit
