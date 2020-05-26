@@ -1,4 +1,4 @@
-# MessageX SDK - Node
+# MessageX SDK - PHP
 
 # THIS SDK IS A WIP AND SHOULD NOT BE DOWNLOADED YET
 
@@ -7,7 +7,7 @@
 
 ![MessageX Logo](https://raw.githubusercontent.com/messagex/node-messagex/master/img/messagex-logo.png "MessageX")
 
-This SDK provides enables node applications with an easy to use interface to the MessageX API.
+This SDK provides enables PHP applications with an easy to use interface to the MessageX API.
 
 ---
 
@@ -20,7 +20,7 @@ This SDK provides enables node applications with an easy to use interface to the
 ## Installation
 
 ```sh
-composer require messagex/php-messagex
+composer require messagex/messagex
 ```
 
 ---
@@ -77,5 +77,4 @@ $client->mail()->send($payload);
 
 ## Testing
 
-To run tests, run the script `tests/run-tests.sh`. Coverage reports are 
-saved to the `./html` which you should view in your browser.
+To run tests, run the script `vendor/bin/phpunit --coverage-text`.
