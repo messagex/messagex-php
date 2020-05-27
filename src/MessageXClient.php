@@ -7,7 +7,7 @@ use GuzzleHttp\Client;
 use PhpApiClient\Clients\AuthClient;
 use PhpApiClient\Clients\MailClient;
 
-class MessageX
+class MessageXClient
 {
     /**
      * @var $authClient
