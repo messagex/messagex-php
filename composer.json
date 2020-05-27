@@ -1,5 +1,5 @@
 {
-    "name": "messagex/messagex",
+    "name": "messagex",
     "description": "A library to make requests to the Messagex API.",
     "type": "library",
     "license": "MIT",
@@ -30,7 +30,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "messagex\\MessageA\\": "src/"
+            "MessageX\\": "src/"
         }
     }
 }
