@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "PhpApiClient\\": "src/"
+            "MessageX\\": "src/"
         },
         "files": [
             "src/helpers.php"
@@ -30,7 +30,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "messagex\\PhpApiClient\\": "src/"
+            "messagex\\MessageA\\": "src/"
         }
     }
 }

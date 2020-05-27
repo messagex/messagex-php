@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpApiClient\Clients;
+namespace MessageX\Clients;
 
 /**
  * This MailClient class will make mail related requests.

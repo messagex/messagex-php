@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpApiClient;
+namespace MessageX;
 
 use GuzzleHttp\Client;
 
-use PhpApiClient\Clients\AuthClient;
-use PhpApiClient\Clients\MailClient;
+use MessageX\Clients\AuthClient;
+use MessageX\Clients\MailClient;
 
 class MessageXClient
 {

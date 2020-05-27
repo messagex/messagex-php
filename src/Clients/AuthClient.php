@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpApiClient\Clients;
+namespace MessageX\Clients;
 
 /**
  * This class will is to make a login request to the API to obtain the bearer token for
