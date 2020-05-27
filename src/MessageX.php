@@ -7,7 +7,7 @@ use GuzzleHttp\Client;
 use PhpApiClient\Clients\AuthClient;
 use PhpApiClient\Clients\MailClient;
 
-class MessageXAPI
+class MessageX
 {
     /**
      * @var $authClient
@@ -35,6 +35,7 @@ class MessageXAPI
      * @var string
      */
     protected $host = 'http://localhost:8000/api/';
+//    protected $host = 'http://api.messagex.test:8080/api/';
 
     /**
      * This is the entry point to the SDK. It will use the API keys to login to obtain
