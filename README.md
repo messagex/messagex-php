@@ -32,11 +32,11 @@ composer require messagex/messagex
 Instantiate the library
 
 ```php
-use messagex\Messagex;
+use MessageX\MessageXClient;
 
 ...
 
-$client = new \MessageXClient($apiKey, $apiSecret);
+$client = new MessageXClient($apiKey, $apiSecret);
 ```
 
 The following example shows how to send an email.
